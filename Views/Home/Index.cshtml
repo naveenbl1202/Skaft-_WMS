@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="full-page-background">
+    <div class="text-center text-light content-wrapper">
+        <!-- Blinking Rainbow Text -->
+        <h1 id="welcomeText" class="display-4">Welcome</h1>
+        <h1 id="skaftoText">Skaftö Bageri WMS</h1>
+        <p>Click on Dashboard to manage!</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Array of colors for the blinking effect
+        const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+        let colorIndex = 0;
+
+        // Function to change the text color periodically
+        function changeColor() {
+            const welcomeText = document.getElementById("welcomeText");
+            const skaftoText = document.getElementById("skaftoText");
+
+            welcomeText.style.color = colors[colorIndex]; // Change color for "Welcome"
+            skaftoText.style.color = colors[(colorIndex + 3) % colors.length]; // Change color for "Skaftö Bageri WMS"
+
+            colorIndex = (colorIndex + 1) % colors.length; // Cycle through the colors
+        }
+
+        // Change color every 500 milliseconds
+        setInterval(changeColor, 500);
+    </script>
+}
+
+<style>
+    .full-page-background {
+        background-image: url('@Url.Content("~/images/BakeriWMS.jpg")');
+        background-size: cover; /* Ensures the image covers the entire viewport */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent tiling of the image */
+        height: 100vh; /* Full viewport height */
+        width: 100%; /* Full viewport width */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: flex-start; /* Align to the top */
+        padding-top: 10%; /* Adjust padding to move slightly down from the top */
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adds a shadow for better readability */
+        overflow: hidden; /* Prevents content overflow */
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .content-wrapper {
+        text-align: center; /* Ensure the text stays centered */
+    }
+
+    #welcomeText, #skaftoText {
+        font-weight: bold;
+    }
+
+    #welcomeText {
+        font-size: 3rem;
+    }
+
+    #skaftoText {
+        font-size: 2.5rem;
+    }
+</style>

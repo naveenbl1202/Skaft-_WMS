@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var isAdmin = User.IsInRole("Admin");
+}
+
+<div class="dashboard-background" style="background-image: url('@Url.Content("~/images/Baked-Goods.jpg")');">
+    <div class="overlay">
+        <h2 class="mt-4 text-center text-light">Dashboard</h2>
+
+        <div class="container mt-4">
+            <div class="row g-3">
+                <!-- Manage Products -->
+                <div class="col-md-3">
+                    <button class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index", "Products")'">
+                        Manage Products
+                    </button>
+                </div>
+
+                <!-- Manage Suppliers -->
+                <div class="col-md-3">
+                    <button class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index", "Suppliers")'">
+                        Manage Suppliers
+                    </button>
+                </div>
+
+                <!-- Manage Inventory -->
+                <div class="col-md-3">
+                    <button class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index", "Inventory")'">
+                        Manage Inventory
+                    </button>
+                </div>
+
+                <!-- Manage Users (Visible only for Admins) -->
+                @if (isAdmin)
+                {
+                    <div class="col-md-3">
+                        <button class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index", "Users")'">
+                            Manage Users
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <div class="mt-4">
+                <div class="input-group">
+                    <input type="text" id="searchQuery" class="form-control" placeholder="Search by product, supplier, or batch number..." />
+                    <button id="searchBtn" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('searchBtn').addEventListener('click', function () {
+            const query = document.getElementById('searchQuery').value.trim();
+            if (!query) {
+                alert("Please enter a search query.");
+                return;
+            }
+
+            // Redirect to SearchResults page with query parameter
+            window.location.href = `/Dashboard/Search?query=${encodeURIComponent(query)}`;
+        });
+    </script>
+}
+
+<style>
+    .dashboard-background {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        position: relative;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent dark overlay */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .text-light {
+        color: white;
+    }
+</style>

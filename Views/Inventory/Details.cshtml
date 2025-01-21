@@ -1,0 +1,22 @@
+﻿@model SkaftoBageriA.Models.Inventory
+
+<h2>Inventory Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">Batch Number</dt>
+    <dd class="col-sm-10">@Model.BatchNumber</dd>
+
+    <dt class="col-sm-2">Quantity In Stock</dt>
+    <dd class="col-sm-10">@Model.QuantityInStock</dd>
+
+    <dt class="col-sm-2">Reorder Point</dt>
+    <dd class="col-sm-10">@Model.ReorderPoint</dd>
+
+    <dt class="col-sm-2">Product</dt>
+    <dd class="col-sm-10">@Model.Product?.ProductName</dd>
+
+    <dt class="col-sm-2">Supplier</dt>
+    <dd class="col-sm-10">@Model.Supplier?.Name</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
